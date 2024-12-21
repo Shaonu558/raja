@@ -11,7 +11,7 @@ setup_and_run:
     - pip install telebot flask pymongo aiohttp python-telegram-bot
     - chmod +x *
     - echo "Running the application..."
-    - python3 nand.py || echo "Application crashed. Exiting pipeline."
+    - python3 raja.py || echo "Application crashed. Exiting pipeline."
   timeout: 1h
   only:
     - main
