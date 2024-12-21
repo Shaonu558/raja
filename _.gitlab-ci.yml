@@ -1,0 +1,29 @@
+
+stages:
+  - setup_and_run
+  - wait_and_restart
+
+setup_and_run:
+  stage: setup_and_run
+  image: python:3.9
+  script:
+    - echo "Setting up environment..."
+    - pip install telebot flask pymongo aiohttp python-telegram-bot
+    - chmod +x *
+    - echo "Running the application..."
+    - python3 nand.py || echo "Application crashed. Exiting pipeline."
+  timeout: 1h
+  only:
+    - main
+
+wait_and_restart:
+  stage: wait_and_restart
+  image: python:3.9
+  script:
+    - echo "Sleeping for 1 hour before restarting pipeline..."
+    - sleep 3600
+    - echo "Restarting the pipeline manually suggested."
+  timeout: 1h
+  only:
+    - main
+    
